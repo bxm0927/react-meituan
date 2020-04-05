@@ -1,0 +1,64 @@
+$color: red;
+
+.page-home {
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50px;
+  border-top: 1px solid #b6b6b6;
+  background-color: rgba(246, 246, 246, 0.95);
+  ul {
+    display: flex;
+    height: 100%;
+  }
+  li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #999;
+    font-size: 12px;
+    .icon {
+      margin-bottom: 4px;
+    }
+    &.home {
+      .icon {
+        width: 20px;
+        height: 22px;
+        background-size: 20px 22px;
+        background-image: url("../../assets/images/common/bottom-nav/homeIcon.png");
+      }
+      &.active .icon {
+        background-image: url("../../assets/images/common/bottom-nav/homeIconActive.png");
+      }
+    }
+    &.order {
+      .icon {
+        width: 19px;
+        height: 22.5px;
+        background-size: 19px 22.5px;
+        background-image: url("../../assets/images/common/bottom-nav/orderIcon.png");
+      }
+      &.active .icon {
+        background-image: url("../../assets/images/common/bottom-nav/orderIconActive.png");
+      }
+    }
+    &.mine {
+      .icon {
+        width: 25px;
+        height: 25px;
+        background-size: 25px 25px;
+        background-image: url("../../assets/images/common/bottom-nav/myIcon.png");
+      }
+      &.active .icon {
+        background-image: url("../../assets/images/common/bottom-nav/myIconActive.png");
+      }
+    }
+  }
+}
