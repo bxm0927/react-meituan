@@ -1,34 +1,38 @@
 import React from "react";
 import { connect } from "react-redux";
-import { increase } from "@/store/modules/home/actionCreators";
+import { hot } from "react-hot-loader/root";
+import { changeActiveTab } from "@/store/modules/home/actionCreators";
 import "./style.scss";
 
-function App({ tabs, count, increase }) {
-  function hanelBtnClick() {
-    increase(1);
+function App({ tabs, activeTabKey, changeActiveTab }) {
+  function handelNavChange(navItem) {
+    if (navItem.key === activeTabKey) return;
+    changeActiveTab(navItem.key);
   }
 
   return (
     <div className="page-home">
-      <section className="banner"></section>
+      <section className="banner">banner</section>
 
-      <main>
-        <h1>Page Home</h1>
-        <p>count: {count}</p>
-        <button onClick={hanelBtnClick}>increase</button>
-      </main>
+      <section className="category">category</section>
+
+      <section className="business">business</section>
 
       <nav className="bottom-nav">
         <ul>
-          {tabs.map((item) => (
-            <li
-              key={item.key}
-              className={`${item.key} ${item.isActive ? "active" : ""}`}
-            >
-              <div className="icon"></div>
-              <span className="name">{item.name}</span>
-            </li>
-          ))}
+          {tabs.map((item) => {
+            const isActive = item.key === activeTabKey ? "active" : "";
+            return (
+              <li
+                onClick={handelNavChange.bind(this, item)}
+                key={item.key}
+                className={`${item.key} ${isActive}`}
+              >
+                <div className="icon"></div>
+                <span className="name">{item.name}</span>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
@@ -36,12 +40,12 @@ function App({ tabs, count, increase }) {
 }
 
 const mapStateToProps = (state) => ({
-  count: state.home.count,
   tabs: state.home.tabs,
+  activeTabKey: state.home.activeTabKey,
 });
 
 const mapDispatchToProps = {
-  increase,
+  changeActiveTab,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default hot(connect(mapStateToProps, mapDispatchToProps)(App));

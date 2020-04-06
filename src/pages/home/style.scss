@@ -1,14 +1,9 @@
-$color: red;
-
-.page-home {
-}
-
 .bottom-nav {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 50px;
+  height: px2rem(50px);
   border-top: 1px solid #b6b6b6;
   background-color: rgba(246, 246, 246, 0.95);
   ul {
@@ -23,15 +18,18 @@ $color: red;
     justify-content: center;
     height: 100%;
     color: #999;
-    font-size: 12px;
+    font-size: px2rem(12px);
     .icon {
-      margin-bottom: 4px;
+      margin-bottom: px2rem(4px);
+    }
+    &.active {
+      color: #000;
     }
     &.home {
       .icon {
-        width: 20px;
-        height: 22px;
-        background-size: 20px 22px;
+        width: px2rem(20px);
+        height: px2rem(22px);
+        background-size: px2rem(20px) px2rem(22px);
         background-image: url("../../assets/images/common/bottom-nav/homeIcon.png");
       }
       &.active .icon {
@@ -40,9 +38,9 @@ $color: red;
     }
     &.order {
       .icon {
-        width: 19px;
-        height: 22.5px;
-        background-size: 19px 22.5px;
+        width: px2rem(19px);
+        height: px2rem(22.5px);
+        background-size: px2rem(19px) px2rem(22.5px);
         background-image: url("../../assets/images/common/bottom-nav/orderIcon.png");
       }
       &.active .icon {
@@ -51,9 +49,9 @@ $color: red;
     }
     &.mine {
       .icon {
-        width: 25px;
-        height: 25px;
-        background-size: 25px 25px;
+        width: px2rem(25px);
+        height: px2rem(25px);
+        background-size: px2rem(25px) px2rem(25px);
         background-image: url("../../assets/images/common/bottom-nav/myIcon.png");
       }
       &.active .icon {

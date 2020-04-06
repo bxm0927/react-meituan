@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-03-05 10:33:59
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-05 21:43:29
+ * @Last Modified time: 2020-04-06 19:50:16
  */
 
 @charset "UTF-8";
@@ -24,7 +24,7 @@ body {
   max-width: 1080px;
   color: #333;
   background-color: #fff;
-  font: 28px/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', 'Hiragino Sans GB',
+  font: px2rem(14px)/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', 'Hiragino Sans GB',
     'Heiti SC', 'WenQuanYi Micro Hei', sans-serif;
   -webkit-overflow-scrolling: touch;
 

@@ -1,7 +1,8 @@
-import { INCREASE } from "./actionTypes";
+import { INCREASE, CHANGE_ACTIVE_TAB } from "./actionTypes";
 
 const initialState = {
-  count: 1,
+  count: 100,
+  activeTabKey: "home",
   tabs: [
     { key: "home", name: "首页", isActive: true },
     { key: "order", name: "订单", isActive: false },
@@ -12,9 +13,10 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case INCREASE:
-      return Object.assign({}, state, {
-        count: state.count + action.count,
-      });
+      return { ...state, count: state.count + action.count };
+
+    case CHANGE_ACTIVE_TAB:
+      return { ...state, activeTabKey: action.activeKey };
 
     default:
       return state;

@@ -18,16 +18,11 @@
 
 ## 技术栈及主要技术点
 
-React 全家桶
-
-Webpack4 从零构建项目环境
-
-移动 Rem 适配方案 + Flex 布局
-
-Hybrid 开发模式
-
-采用 Express 实现后端代理请求真实数据
-
+- Webpack4 从零构建项目环境（而不是使用 create-react-app）
+- React 全家桶
+- 移动 Rem 适配方案
+- Hybrid 开发模式
+- 采用 Express 实现后端代理请求真实数据
 
 ![image.png](https://i.loli.net/2020/03/24/6UkFuJSp9jgfzMO.png)
 

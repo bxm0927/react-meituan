@@ -2,12 +2,14 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-05 22:38:07
+ * @Last Modified time: 2020-04-06 19:21:44
  */
 
 const fs = require("fs");
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -76,6 +78,13 @@ module.exports = {
   },
   module: {
     rules: [
+      // ESLint
+      {
+        enforce: "pre",
+        test: /\.jsx?$/,
+        loader: "eslint-loader",
+        exclude: /node_modules/,
+      },
       // scripts
       {
         test: /\.jsx?$/,
@@ -86,18 +95,27 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          // {
-          //   loader: MiniCssExtractPlugin.loader,
-          //   options: {
-          //     // you can specify a publicPath here
-          //     // by default it uses publicPath in webpackOptions.output
-          //     hmr: process.env.NODE_ENV === 'development',
-          //   },
-          // },
-          "style-loader",
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              hmr: DEV_MODE,
+            },
+          },
+          // "style-loader",
           "css-loader",
           "postcss-loader",
           "sass-loader",
+          {
+            loader: "sass-resources-loader",
+            options: {
+              resources: [
+                path.resolve(SRC_DIR, "assets/stylesheets/vars.scss"),
+                path.resolve(SRC_DIR, "assets/stylesheets/resources.scss"),
+              ],
+            },
+          },
         ],
         include: SRC_DIR,
       },
@@ -160,8 +178,20 @@ module.exports = {
     // creation of HTML files
     ...htmlWebpackPlugin,
 
+    // HMR
+    new webpack.HotModuleReplacementPlugin(),
+
     // Remove build folder(s) before building
     new CleanWebpackPlugin(),
+
+    // Copies individual files or entire directories,
+    // which already exist, to the build directory.
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, "../public"),
+        to: "public",
+      },
+    ]),
 
     // Extract css
     new MiniCssExtractPlugin({
@@ -175,5 +205,6 @@ module.exports = {
     contentBase: DIST_DIR,
     compress: true,
     port: 9000,
+    hot: true,
   },
 };
