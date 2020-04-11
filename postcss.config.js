@@ -23,7 +23,7 @@ module.exports = {
     // Convert pixel units to rem (root em) units using PostCSS.
     // https://github.com/cuth/postcss-pxtorem
     "postcss-pxtorem": {
-      rootValue: 20, // iPhone6 html font-size: 20px;
+      rootValue: 40,
       unitPrecision: 5,
       minPixelValue: 2,
       propList: ["*"],

@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-03-05 10:33:59
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-10 21:28:20
+ * @Last Modified time: 2020-04-11 13:16:26
  */
 
 @charset "UTF-8";
@@ -24,8 +24,7 @@ body {
   max-width: 1080PX;
   color: #333;
   background-color: #fff;
-  font: px2rem(14px)/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', 'Hiragino Sans GB',
-    'Heiti SC', 'WenQuanYi Micro Hei', sans-serif;
+  font: 28px/1.5 system-ui;
   -webkit-overflow-scrolling: touch;
 
   // Better Font Rendering
@@ -149,10 +148,10 @@ pre {
 }
 
 blockquote, q {
-	quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+  content: '';
+  content: none;
 }

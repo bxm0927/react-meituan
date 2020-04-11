@@ -3,7 +3,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 50px;
+  height: 100px;
   border-top: 1px solid #b6b6b6;
   background-color: rgba(246, 246, 246, 0.95);
   ul {
@@ -18,18 +18,18 @@
     justify-content: center;
     height: 100%;
     color: #999;
-    font-size: 12px;
+    font-size: 24px;
     .icon {
-      margin-bottom: 4px;
+      margin-bottom: 8px;
     }
     &.active {
       color: #000;
     }
     &.index {
       .icon {
-        width: 20px;
-        height: 22px;
-        background-size: 20px 22px;
+        width: 40px;
+        height: 44px;
+        background-size: 40px 44px;
         background-image: url("../../assets/images/common/bottom-nav/homeIcon.png");
       }
       &.active .icon {
@@ -38,9 +38,9 @@
     }
     &.order {
       .icon {
-        width: 19px;
-        height: 22.5px;
-        background-size: 19px 22.5px;
+        width: 38px;
+        height: 45px;
+        background-size: 38px 45px;
         background-image: url("../../assets/images/common/bottom-nav/orderIcon.png");
       }
       &.active .icon {
@@ -49,9 +49,9 @@
     }
     &.mine {
       .icon {
-        width: 25px;
-        height: 25px;
-        background-size: 25px 25px;
+        width: 50px;
+        height: 50px;
+        background-size: 50px 50px;
         background-image: url("../../assets/images/common/bottom-nav/myIcon.png");
       }
       &.active .icon {
