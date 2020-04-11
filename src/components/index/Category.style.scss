@@ -1,0 +1,23 @@
+.category-wrapper {
+  padding-bottom: 20px;
+  background-color: #f0efed;
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    background-color: #fff;
+  }
+  .category-item {
+    flex: 0 0 20%;
+    margin-top: 20px;
+    text-align: center;
+    .img {
+      width: 88x;
+      height: 88px;
+    }
+    .name {
+      color: #333;
+      font-size: 24px;
+    }
+  }
+}

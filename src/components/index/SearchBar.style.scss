@@ -1,0 +1,49 @@
+.search-bar {
+  display: flex;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 80px;
+  right: 80px;
+  padding: 20px;
+  height: 100px;
+  .city {
+    box-sizing: border-box;
+    flex: 0 0 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 40px;
+    padding: 0 8px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    .city-name {
+      // 城市名最多展示 4 个字
+      max-width: 4em;
+    }
+    .icon-location {
+      font-size: 40px;
+    }
+    .icon-more {
+      font-size: 36px;
+    }
+  }
+  .input {
+    box-sizing: border-box;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #fff;
+    border-radius: 30px;
+    .icon-search {
+      margin-right: 12px;
+      font-size: 32px;
+      color: #333;
+    }
+    .place-holder {
+      color: #ababab;
+    }
+  }
+}

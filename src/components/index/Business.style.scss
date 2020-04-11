@@ -1,0 +1,61 @@
+.business-wrapper {
+  h2.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    line-height: 80px;
+    font-size: 36px;
+    font-weight: bold;
+    border-bottom: 1px solid #e4e4e4;
+    &::before,
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 120px;
+      height: 1px;
+      background-color: #666;
+      transform: scale(0.5);
+    }
+    &::before {
+      margin-right: 10px;
+      transform-origin: 100% 50%;
+    }
+    &::after {
+      margin-left: 10px;
+      transform-origin: 0 50%;
+    }
+  }
+  .business-list {
+    box-sizing: border-box;
+    padding: 0 30px;
+  }
+  .business-item {
+    position: relative;
+    padding: 20px 0;
+    border-top: 1px solid #e4e4e4;
+    &:first-child {
+      border-top: none;
+    }
+  }
+  .business-link {
+    display: flex;
+  }
+  .business-pic {
+    flex: 0 0 180px;
+    margin-right: 20px;
+    .pic {
+      width: 100%;
+    }
+  }
+  .business-info {
+    flex: 1;
+    overflow: hidden;
+    .name {
+      width: 80%;
+      color: #333;
+      font-size: 32px;
+      font-weight: bold;
+    }
+  }
+}

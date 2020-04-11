@@ -2,7 +2,7 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-11 12:03:37
+ * @Last Modified time: 2020-04-11 22:47:02
  */
 
 const fs = require("fs");
@@ -51,7 +51,7 @@ const getTemplates = (entrys) => {
         filename: `${pageName}.html`,
         template: fullFilePath,
         chunks: [pageName],
-        title: `Page ${pageName}`
+        title: `Page ${pageName}`,
       });
       htmlWebpackPlugin.push(html);
     }
@@ -205,7 +205,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, "../static"),
-        to: "static",
+        to: DIST_DIR,
       },
     ]),
 

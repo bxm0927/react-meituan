@@ -5,6 +5,7 @@ import App from "./App";
 import store from "@/store";
 import "@/assets/stylesheets/reset.scss";
 import "@/assets/stylesheets/common.scss";
+import "@/assets/fonts/iconfont.css";
 
 render(
   <Provider store={store}>
