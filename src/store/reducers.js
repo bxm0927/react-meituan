@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import home from './modules/home/reducers'
+import index from './modules/index/reducers'
 
 export default combineReducers({
-  home,
+  index,
 })

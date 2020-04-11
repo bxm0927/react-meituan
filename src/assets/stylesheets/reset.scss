@@ -3,7 +3,7 @@
  * @Author: xiaoming.bai
  * @Date: 2019-03-05 10:33:59
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-06 19:50:16
+ * @Last Modified time: 2020-04-10 21:28:20
  */
 
 @charset "UTF-8";
@@ -18,10 +18,10 @@ html {
 
 // Mobile
 body {
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 320px;
-  max-width: 1080px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-width: 320PX;
+  max-width: 1080PX;
   color: #333;
   background-color: #fff;
   font: px2rem(14px)/1.5 'Helvetica Neue', Helvetica, Arial, 'Microsoft Yahei', 'Hiragino Sans GB',

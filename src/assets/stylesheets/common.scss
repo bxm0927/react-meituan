@@ -3,18 +3,17 @@
  * @Author: xiaoming.bai
  * @Date: 2018-11-27 11:02:41
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-01-01 15:20:17
+ * @Last Modified time: 2020-04-10 21:28:10
  */
-
-@import './var.scss';
 
 // ******************************** Layouts ******************************** //
 // Page container
 .container {
   position: relative;
-  width: $page-width;
-  margin-left: auto;
-  margin-right: auto;
+  min-width: 320PX;
+  max-width: 1080PX;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 // Transform centering

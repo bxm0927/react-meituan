@@ -2,7 +2,7 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-06 19:21:44
+ * @Last Modified time: 2020-04-11 12:03:37
  */
 
 const fs = require("fs");
@@ -20,7 +20,7 @@ const SRC_DIR = path.resolve(__dirname, "../src");
 const PAGES_DIR = path.resolve(SRC_DIR, "pages");
 const DEV_MODE = process.env.NODE_ENV !== "production";
 
-// 多入口配置
+// Multi-entry configuration
 const getEntries = () => {
   let entrys = {};
 
@@ -37,7 +37,7 @@ const getEntries = () => {
   return entrys;
 };
 
-// 多模版配置
+// Multi-template configuration
 const getTemplates = (entrys) => {
   let htmlWebpackPlugin = [];
 
@@ -48,11 +48,10 @@ const getTemplates = (entrys) => {
 
     if (status.isDirectory() && fs.existsSync(fullFilePath)) {
       const html = new HtmlWebpackPlugin({
-        filename: DEV_MODE
-          ? `${pageName}.html`
-          : `${pageName}.[contenthash:5].html`,
+        filename: `${pageName}.html`,
         template: fullFilePath,
         chunks: [pageName],
+        title: `Page ${pageName}`
       });
       htmlWebpackPlugin.push(html);
     }
@@ -68,7 +67,7 @@ module.exports = {
   entry: entrys,
   output: {
     path: DIST_DIR,
-    filename: DEV_MODE ? "[name].js" : "[name].[contenthash:5].js",
+    filename: DEV_MODE ? "js/[name].js" : "js/[name].[hash:8].js",
   },
   resolve: {
     extensions: [".js", ".json", ".jsx"],
@@ -103,10 +102,27 @@ module.exports = {
               hmr: DEV_MODE,
             },
           },
-          // "style-loader",
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              // 0 => no loaders (default);
+              // 1 => postcss-loader;
+              // 2 => postcss-loader, sass-loader
+              importLoaders: 1,
+              // Open CSS Modules
+              // modules: {
+              //   localIdentName: "[local]__[hash:base64:5]",
+              // },
+            },
+          },
+
+          // PostCSS loader for webpack
           "postcss-loader",
+
+          // Compiles Sass to CSS, using node-sass by default.
           "sass-loader",
+
+          // SASS resources (e.g. variables, mixins etc.) loader for Webpack.
           {
             loader: "sass-resources-loader",
             options: {
@@ -188,8 +204,8 @@ module.exports = {
     // which already exist, to the build directory.
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, "../public"),
-        to: "public",
+        from: path.resolve(__dirname, "../static"),
+        to: "static",
       },
     ]),
 
@@ -197,8 +213,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: DEV_MODE ? "css/[name].css" : "css/[name].[contenthash:5].css",
-      chunkFilename: DEV_MODE ? "css/[id].css" : "css/[id].[contenthash:5].css",
+      filename: DEV_MODE ? "css/[name].css" : "css/[name].[contenthash:8].css",
+      chunkFilename: DEV_MODE ? "css/[id].css" : "css/[id].[contenthash:8].css",
     }),
   ],
   devServer: {

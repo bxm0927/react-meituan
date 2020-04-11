@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader/root";
-import { changeActiveTab } from "@/store/modules/home/actionCreators";
+import { changeActiveTab } from "@/store/modules/index/actionCreators";
 import "./style.scss";
 
 function App({ tabs, activeTabKey, changeActiveTab }) {
@@ -11,14 +11,14 @@ function App({ tabs, activeTabKey, changeActiveTab }) {
   }
 
   return (
-    <div className="page-home">
+    <div className="page-index">
       <section className="banner">banner</section>
 
       <section className="category">category</section>
 
       <section className="business">business</section>
 
-      <nav className="bottom-nav">
+      <nav className="container bottom-nav">
         <ul>
           {tabs.map((item) => {
             const isActive = item.key === activeTabKey ? "active" : "";
@@ -40,8 +40,8 @@ function App({ tabs, activeTabKey, changeActiveTab }) {
 }
 
 const mapStateToProps = (state) => ({
-  tabs: state.home.tabs,
-  activeTabKey: state.home.activeTabKey,
+  tabs: state.index.tabs,
+  activeTabKey: state.index.activeTabKey,
 });
 
 const mapDispatchToProps = {
