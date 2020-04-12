@@ -1,39 +1,41 @@
 import axios from 'axios'
 import * as constants from './actionTypes'
 
-export const increase = (count) => ({
-  type: constants.INCREASE,
-  count,
-})
-
 export const changeActiveTab = (activeKey) => ({
   type: constants.CHANGE_ACTIVE_TAB,
   activeKey,
 })
 
-export const setCategoryData = (categoryData) => ({
-  type: constants.SET_CATEGORY_DATA,
-  categoryData,
+export const setCategoryList = (categoryList) => ({
+  type: constants.SET_CATEGORY_LIST,
+  categoryList,
 })
 
-export const setBusinessData = (businessData) => ({
-  type: constants.SET_BUSINESS_DATA,
-  businessData,
+export const setBusinessList = (businessList) => ({
+  type: constants.SET_BUSINESS_LIST,
+  businessList,
 })
 
-export const getCategoryData = () => async (dispatch) => {
+export const setFetchingState = (isFetching) => ({
+  type: constants.SET_FETCHING_STATE,
+  isFetching,
+})
+
+export const getCategoryList = () => async (dispatch) => {
   const { status, data } = await axios.get('/mock/categoryList.json')
   if (status === 200 && data.code === 0) {
-    const categoryData = data.data
-    dispatch(setCategoryData(categoryData))
+    const categoryList = data.data.primary_filter.slice(0, 10)
+    dispatch(setCategoryList(categoryList))
   }
 }
 
-export const getBusinessData = () => async (dispatch) => {
-  const { status, data } = await axios.get('/mock/businessList.json')
+export const getBusinessList = (pageIndex = 1) => async (dispatch) => {
+  const { status, data } = await axios.get('/mock/businessList.json', {
+    params: { pageIndex },
+  })
+
   if (status === 200 && data.code === 0) {
-    const businessData = data.data
-    console.log('businessData: ', businessData)
-    dispatch(setBusinessData(businessData))
+    const businessList = data.data.poilist
+    dispatch(setBusinessList(businessList))
   }
 }

@@ -1,34 +1,44 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getBusinessData } from '@/store/modules/index/actionCreators'
+import BusinessItem from './BusinessItem'
+import { getBusinessList, setFetchingState } from '@/store/modules/index/actionCreators'
+import { getDocumentSize, getClientSize, getScrollDistance } from '@/assets/javascripts/utils/bom'
 import './Business.style.scss'
 
-function Business({ businessData, getBusinessData }) {
-  const businessList = businessData ? businessData.poilist : []
+function Business({ businessList, getBusinessList, isFetching, setFetchingState }) {
+  const [pageIndex, setPageIndex] = useState(1)
 
   useEffect(() => {
-    getBusinessData()
+    getBusinessList()
   }, [])
 
-  function renderBusinessList(businessList) {
-    return businessList.map((item) => (
-      <li key={item.id} className="business-item">
-        <a href={`/detail/${item.id}`} className="business-link">
-          <div className="business-pic">
-            <img className="pic" src={item.pic_url} alt={item.name} />
-          </div>
+  useEffect(() => {
+    document.addEventListener('scroll', scrollFetch())
+    return () => {
+      document.removeEventListener('scroll', scrollFetch())
+    }
+  }, [])
 
-          <div className="business-info">
-            <p className="name ellipsis">{item.name}</p>
-            <p className="sold">月销{item.month_sale_num}+</p>
-            <div className="meta-data">
-              <span className="price">{item.min_price_tip}</span>
-              <span className="price">{item.shipping_fee_tip}</span>
-              <span className="price">{item.average_price_tip}</span>
-            </div>
-          </div>
-        </a>
-      </li>
+  // BUG: isFetching
+  const scrollFetch = () => () => {
+    if (isFetching) return
+
+    let scrollTop = getScrollDistance().scrollTop
+    let clientHeight = getClientSize().clientHeight
+    const documentHeight = getDocumentSize().documentHeight
+
+    if (scrollTop + clientHeight >= documentHeight - clientHeight) {
+      // 最多加载 3 页
+      if (pageIndex > 3) return
+      setFetchingState(true)
+      getBusinessList(pageIndex)
+      setPageIndex(pageIndex + 1)
+    }
+  }
+
+  function renderBusinessList(businessList) {
+    return businessList.map((item, index) => (
+      <BusinessItem key={item.id + index} index={index} item={item} />
     ))
   }
 
@@ -41,11 +51,13 @@ function Business({ businessData, getBusinessData }) {
 }
 
 const mapStateToProps = (state) => ({
-  businessData: state.index.businessData,
+  businessList: state.index.businessList,
+  isFetching: state.index.isFetching,
 })
 
 const mapDispatchToProps = {
-  getBusinessData,
+  getBusinessList,
+  setFetchingState,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Business)

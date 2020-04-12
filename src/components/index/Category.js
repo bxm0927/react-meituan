@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getCategoryData } from '@/store/modules/index/actionCreators'
+import { getCategoryList } from '@/store/modules/index/actionCreators'
 import './Category.style.scss'
 
-function Category({ categoryData, getCategoryData }) {
-  const categoryList = categoryData ? categoryData.primary_filter.slice(0, 10) : []
-
+function Category({ categoryList, getCategoryList }) {
   useEffect(() => {
-    getCategoryData()
+    getCategoryList()
   }, [])
 
   function renderCategoryList(categoryList) {
@@ -29,11 +27,11 @@ function Category({ categoryData, getCategoryData }) {
 }
 
 const mapStateToProps = (state) => ({
-  categoryData: state.index.categoryData,
+  categoryList: state.index.categoryList,
 })
 
 const mapDispatchToProps = {
-  getCategoryData,
+  getCategoryList,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category)
