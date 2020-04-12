@@ -10,7 +10,7 @@
     border-bottom: 1px solid #e4e4e4;
     &::before,
     &::after {
-      content: "";
+      content: '';
       display: inline-block;
       width: 120px;
       height: 1px;
@@ -40,6 +40,8 @@
   }
   .business-link {
     display: flex;
+    font-size: 24px;
+    color: #666;
   }
   .business-pic {
     flex: 0 0 180px;
@@ -50,12 +52,24 @@
   }
   .business-info {
     flex: 1;
+    line-height: 1;
     overflow: hidden;
     .name {
+      margin-top: 10px;
+      margin-bottom: 12px;
       width: 80%;
       color: #333;
       font-size: 32px;
       font-weight: bold;
+    }
+    .sold {
+      margin-bottom: 20px;
+    }
+    .meta-data {
+      position: relative;
+    }
+    .price {
+      margin-right: 12px;
     }
   }
 }

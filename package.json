@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "lodash": "^4.17.15",
     "react": "^16.13.1",

@@ -2,49 +2,49 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-11 22:47:02
+ * @Last Modified time: 2020-04-12 14:24:10
  */
 
-const fs = require("fs");
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const fs = require('fs')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const MAIN_FILE = "index.js";
-const TEMPLATE_FILE = "index.html";
-const DIST_DIR = path.resolve(__dirname, "../dist");
-const SRC_DIR = path.resolve(__dirname, "../src");
-const PAGES_DIR = path.resolve(SRC_DIR, "pages");
-const DEV_MODE = process.env.NODE_ENV !== "production";
+const MAIN_FILE = 'index.js'
+const TEMPLATE_FILE = 'index.html'
+const DIST_DIR = path.resolve(__dirname, '../dist')
+const SRC_DIR = path.resolve(__dirname, '../src')
+const PAGES_DIR = path.resolve(SRC_DIR, 'pages')
+const DEV_MODE = process.env.NODE_ENV !== 'production'
 
 // Multi-entry configuration
 const getEntries = () => {
-  let entrys = {};
+  let entrys = {}
 
   fs.readdirSync(PAGES_DIR).forEach((pageName) => {
-    const fullPagePath = path.resolve(PAGES_DIR, pageName);
-    const fullFilePath = path.resolve(fullPagePath, MAIN_FILE);
-    const status = fs.statSync(fullPagePath);
+    const fullPagePath = path.resolve(PAGES_DIR, pageName)
+    const fullFilePath = path.resolve(fullPagePath, MAIN_FILE)
+    const status = fs.statSync(fullPagePath)
 
     if (status.isDirectory() && fs.existsSync(fullFilePath)) {
-      entrys[pageName] = fullFilePath;
+      entrys[pageName] = fullFilePath
     }
-  });
+  })
 
-  return entrys;
-};
+  return entrys
+}
 
 // Multi-template configuration
 const getTemplates = (entrys) => {
-  let htmlWebpackPlugin = [];
+  let htmlWebpackPlugin = []
 
   Object.keys(entrys).forEach((pageName) => {
-    const fullPagePath = path.resolve(PAGES_DIR, pageName);
-    const fullFilePath = path.resolve(fullPagePath, TEMPLATE_FILE);
-    const status = fs.statSync(fullPagePath);
+    const fullPagePath = path.resolve(PAGES_DIR, pageName)
+    const fullFilePath = path.resolve(fullPagePath, TEMPLATE_FILE)
+    const status = fs.statSync(fullPagePath)
 
     if (status.isDirectory() && fs.existsSync(fullFilePath)) {
       const html = new HtmlWebpackPlugin({
@@ -52,42 +52,42 @@ const getTemplates = (entrys) => {
         template: fullFilePath,
         chunks: [pageName],
         title: `Page ${pageName}`,
-      });
-      htmlWebpackPlugin.push(html);
+      })
+      htmlWebpackPlugin.push(html)
     }
-  });
+  })
 
-  return htmlWebpackPlugin;
-};
+  return htmlWebpackPlugin
+}
 
-const entrys = getEntries();
-const htmlWebpackPlugin = getTemplates(entrys);
+const entrys = getEntries()
+const htmlWebpackPlugin = getTemplates(entrys)
 
 module.exports = {
   entry: entrys,
   output: {
     path: DIST_DIR,
-    filename: DEV_MODE ? "js/[name].js" : "js/[name].[hash:8].js",
+    filename: DEV_MODE ? 'js/[name].js' : 'js/[name].[hash:8].js',
   },
   resolve: {
-    extensions: [".js", ".json", ".jsx"],
+    extensions: ['.js', '.json', '.jsx'],
     alias: {
-      "@": SRC_DIR,
+      '@': SRC_DIR,
     },
   },
   module: {
     rules: [
       // ESLint
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /\.jsx?$/,
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         exclude: /node_modules/,
       },
       // scripts
       {
         test: /\.jsx?$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         exclude: /node_modules/,
       },
       // stylesheets
@@ -103,7 +103,7 @@ module.exports = {
             },
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               // 0 => no loaders (default);
               // 1 => postcss-loader;
@@ -117,18 +117,18 @@ module.exports = {
           },
 
           // PostCSS loader for webpack
-          "postcss-loader",
+          'postcss-loader',
 
           // Compiles Sass to CSS, using node-sass by default.
-          "sass-loader",
+          'sass-loader',
 
           // SASS resources (e.g. variables, mixins etc.) loader for Webpack.
           {
-            loader: "sass-resources-loader",
+            loader: 'sass-resources-loader',
             options: {
               resources: [
-                path.resolve(SRC_DIR, "assets/stylesheets/vars.scss"),
-                path.resolve(SRC_DIR, "assets/stylesheets/resources.scss"),
+                path.resolve(SRC_DIR, 'assets/stylesheets/vars.scss'),
+                path.resolve(SRC_DIR, 'assets/stylesheets/resources.scss'),
               ],
             },
           },
@@ -140,11 +140,11 @@ module.exports = {
         test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 8 * 1024, // 8K
-              outputPath: "img/",
-              name: DEV_MODE ? "[name].[ext]" : "[name].[hash:8].[ext]",
+              outputPath: 'img/',
+              name: DEV_MODE ? '[name].[ext]' : '[name].[hash:8].[ext]',
             },
           },
         ],
@@ -154,10 +154,10 @@ module.exports = {
       {
         test: /\.(svg)(\?.*)?$/,
         use: {
-          loader: "file-loader",
+          loader: 'file-loader',
           options: {
-            outputPath: "img/",
-            name: DEV_MODE ? "[name].[ext]" : "[name].[hash:8].[ext]",
+            outputPath: 'img/',
+            name: DEV_MODE ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
         include: SRC_DIR,
@@ -166,11 +166,11 @@ module.exports = {
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
             limit: 8 * 1024, // 8K
-            outputPath: "fonts/",
-            name: DEV_MODE ? "[name].[ext]" : "[name].[hash:8].[ext]",
+            outputPath: 'fonts/',
+            name: DEV_MODE ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
         include: SRC_DIR,
@@ -179,11 +179,11 @@ module.exports = {
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
             limit: 8 * 1024, // 8K
-            outputPath: "media/",
-            name: DEV_MODE ? "[name].[ext]" : "[name].[hash:8].[ext]",
+            outputPath: 'media/',
+            name: DEV_MODE ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
         include: SRC_DIR,
@@ -204,7 +204,7 @@ module.exports = {
     // which already exist, to the build directory.
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, "../static"),
+        from: path.resolve(__dirname, '../static'),
         to: DIST_DIR,
       },
     ]),
@@ -213,8 +213,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: DEV_MODE ? "css/[name].css" : "css/[name].[contenthash:8].css",
-      chunkFilename: DEV_MODE ? "css/[id].css" : "css/[id].[contenthash:8].css",
+      filename: DEV_MODE ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
+      chunkFilename: DEV_MODE ? 'css/[id].css' : 'css/[id].[contenthash:8].css',
     }),
   ],
   devServer: {
@@ -223,4 +223,4 @@ module.exports = {
     port: 9000,
     hot: true,
   },
-};
+}

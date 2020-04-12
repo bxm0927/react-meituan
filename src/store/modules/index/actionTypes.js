@@ -1,3 +1,7 @@
 export const INCREASE = 'INCREASE'
 export const DECREASE = 'DECREASE'
+
 export const CHANGE_ACTIVE_TAB = 'CHANGE_ACTIVE_TAB'
+
+export const SET_CATEGORY_DATA = 'SET_CATEGORY_DATA'
+export const SET_BUSINESS_DATA = 'SET_BUSINESS_DATA'
