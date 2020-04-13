@@ -1,62 +1,84 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import BusinessItem from './BusinessItem'
-import { getBusinessList, setFetchingState } from '@/store/modules/index/actionCreators'
+import {
+  getBusinessList,
+  setPageIndex,
+  setFetchingState,
+} from '@/store/modules/index/actionCreators'
 import { getDocumentSize, getClientSize, getScrollDistance } from '@/assets/javascripts/utils/bom'
 import './Business.style.scss'
 
-function Business({ businessList, getBusinessList, isFetching, setFetchingState }) {
-  const [pageIndex, setPageIndex] = useState(1)
-
+function Business({
+  businessList,
+  getBusinessList,
+  pageIndex,
+  setPageIndex,
+  isFetching,
+  setFetchingState,
+}) {
+  // 页面初始化时，加载列表数据
   useEffect(() => {
-    getBusinessList()
+    getBusinessList(pageIndex)
   }, [])
 
+  // 页面滚动时，加载列表数据
   useEffect(() => {
-    document.addEventListener('scroll', scrollFetch())
-    return () => {
-      document.removeEventListener('scroll', scrollFetch())
-    }
-  }, [])
+    document.addEventListener('scroll', scrollFetch)
+    return () => document.removeEventListener('scroll', scrollFetch)
+  }, [isFetching, pageIndex])
 
-  // BUG: isFetching
-  const scrollFetch = () => () => {
-    if (isFetching) return
+  const scrollFetch = () => {
+    // 最多加载 3 页
+    if (isFetching || pageIndex >= 3) return
 
     let scrollTop = getScrollDistance().scrollTop
     let clientHeight = getClientSize().clientHeight
     const documentHeight = getDocumentSize().documentHeight
 
+    // 提前一屏加载数据
     if (scrollTop + clientHeight >= documentHeight - clientHeight) {
-      // 最多加载 3 页
-      if (pageIndex > 3) return
+      const nextPageIndex = pageIndex + 1
       setFetchingState(true)
-      getBusinessList(pageIndex)
-      setPageIndex(pageIndex + 1)
+      setPageIndex(nextPageIndex)
+      getBusinessList(nextPageIndex)
     }
   }
 
-  function renderBusinessList(businessList) {
+  const renderBusinessList = () => {
     return businessList.map((item, index) => (
       <BusinessItem key={item.id + index} index={index} item={item} />
     ))
   }
 
+  const renderLoading = () => {
+    if (!isFetching) return
+    return (
+      <div className="loading">
+        <img src={require('@/assets/images/common/loading.svg').default} alt="loading" />
+        加载中...
+      </div>
+    )
+  }
+
   return (
     <section className="business-wrapper">
       <h2 className="title">附近商家</h2>
-      <ul className="business-list">{renderBusinessList(businessList)}</ul>
+      <ul className="business-list">{renderBusinessList()}</ul>
+      {renderLoading()}
     </section>
   )
 }
 
 const mapStateToProps = (state) => ({
   businessList: state.index.businessList,
+  pageIndex: state.index.pageIndex,
   isFetching: state.index.isFetching,
 })
 
 const mapDispatchToProps = {
   getBusinessList,
+  setPageIndex,
   setFetchingState,
 }
 

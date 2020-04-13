@@ -16,6 +16,16 @@ export const setBusinessList = (businessList) => ({
   businessList,
 })
 
+export const setPageIndex = (pageIndex) => ({
+  type: constants.SET_PAGE_INDEX,
+  pageIndex,
+})
+
+export const setLastPageState = (isLastPage) => ({
+  type: constants.SET_LAST_PAGE_STATE,
+  isLastPage,
+})
+
 export const setFetchingState = (isFetching) => ({
   type: constants.SET_FETCHING_STATE,
   isFetching,
@@ -29,13 +39,17 @@ export const getCategoryList = () => async (dispatch) => {
   }
 }
 
-export const getBusinessList = (pageIndex = 1) => async (dispatch) => {
-  const { status, data } = await axios.get('/mock/businessList.json', {
-    params: { pageIndex },
-  })
+export const getBusinessList = (pageIndex) => (dispatch) => {
+  // 模拟加载慢的场景，显示 loading
+  setTimeout(async () => {
+    const { status, data } = await axios.get('/mock/businessList.json', {
+      params: { pageIndex },
+    })
 
-  if (status === 200 && data.code === 0) {
-    const businessList = data.data.poilist
-    dispatch(setBusinessList(businessList))
-  }
+    if (status === 200 && data.code === 0) {
+      const businessList = data.data.poilist
+      dispatch(setBusinessList(businessList))
+      dispatch(setFetchingState(false))
+    }
+  }, 666)
 }
