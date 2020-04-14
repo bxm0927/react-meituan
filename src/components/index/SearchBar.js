@@ -1,5 +1,5 @@
-import React from "react";
-import "./SearchBar.style.scss";
+import React from 'react'
+import './SearchBar.style.scss'
 
 function SearchBar() {
   return (
@@ -15,7 +15,7 @@ function SearchBar() {
         <span className="place-holder">鸡翅</span>
       </div>
     </div>
-  );
+  )
 }
 
-export default SearchBar;
+export default SearchBar

@@ -1,1 +1,1 @@
-console.log("page detail");
+console.log('page detail')

@@ -1,7 +1,7 @@
-import React from "react";
-import SearchBar from "./SearchBar";
-import banner from "@/assets/images/index/bannertemp.e8a6fa63.jpg";
-import "./Banner.style.scss";
+import React from 'react'
+import SearchBar from './SearchBar'
+import banner from '@/assets/images/index/bannertemp.e8a6fa63.jpg'
+import './Banner.style.scss'
 
 function Banner() {
   return (
@@ -12,7 +12,7 @@ function Banner() {
         <img src={banner} alt="banner" />
       </div>
     </section>
-  );
+  )
 }
 
-export default Banner;
+export default Banner
