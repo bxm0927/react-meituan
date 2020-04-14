@@ -69,13 +69,13 @@
           background-repeat: no-repeat;
         }
         .fullstar {
-          background-image: url('../../assets/images/common/star/fullstar.png');
+          background-image: url('~@/assets/images/common/star/fullstar.png');
         }
         .halfstar {
-          background-image: url('../../assets/images/common/star/halfstar.png');
+          background-image: url('~@/assets/images/common/star/halfstar.png');
         }
         .graystar {
-          background-image: url('../../assets/images/common/star/graystar.png');
+          background-image: url('~@/assets/images/common/star/graystar.png');
         }
       }
       .count {
@@ -118,8 +118,6 @@
         width: 30px;
         height: 30px;
         margin-right: 10px;
-      }
-      .info {
       }
     }
   }
