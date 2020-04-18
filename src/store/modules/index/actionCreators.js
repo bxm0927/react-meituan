@@ -31,6 +31,11 @@ export const setFetchingState = (isFetching) => ({
   isFetching,
 })
 
+export const setOrderList = (orderList) => ({
+  type: constants.SET_ORDER_LIST,
+  orderList,
+})
+
 export const getCategoryList = () => async (dispatch) => {
   const { status, data } = await axios.get('/mock/categoryList.json')
   if (status === 200 && data.code === 0) {
@@ -51,5 +56,13 @@ export const getBusinessList = (pageIndex) => (dispatch) => {
       dispatch(setBusinessList(businessList))
       dispatch(setFetchingState(false))
     }
-  }, 666)
+  }, 500)
+}
+
+export const getOrderList = () => async (dispatch) => {
+  const { status, data } = await axios.get('/mock/orders.json')
+  if (status === 200 && data.code === 0) {
+    const orderList = data.data.digestlist
+    dispatch(setOrderList(orderList))
+  }
 }

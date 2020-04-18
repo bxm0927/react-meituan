@@ -1,11 +1,10 @@
+// home
 export const CHANGE_ACTIVE_TAB = 'CHANGE_ACTIVE_TAB'
-
 export const SET_CATEGORY_LIST = 'SET_CATEGORY_LIST'
-
 export const SET_BUSINESS_LIST = 'SET_BUSINESS_LIST'
-
 export const SET_PAGE_INDEX = 'SET_PAGE_INDEX'
-
 export const SET_LAST_PAGE_STATE = 'SET_LAST_PAGE_STATE'
-
 export const SET_FETCHING_STATE = 'SET_FETCHING_STATE'
+
+// order
+export const SET_ORDER_LIST = 'SET_ORDER_LIST'

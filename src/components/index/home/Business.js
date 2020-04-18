@@ -46,25 +46,32 @@ function Business({
   }
 
   const renderBusinessList = () => {
-    return businessList.map((item, index) => (
-      <BusinessItem key={item.id + index} index={index} item={item} />
-    ))
+    return (
+      <ul className="business-list">
+        {businessList.map((item, index) => (
+          <BusinessItem key={item.id + index} index={index} item={item} />
+        ))}
+      </ul>
+    )
   }
 
   const renderLoading = () => {
-    if (!isFetching) return
-    return (
-      <div className="loading">
-        <img src={require('@/assets/images/common/loading.svg').default} alt="loading" />
-        加载中...
-      </div>
-    )
+    if (!businessList || (businessList && businessList.length === 0)) return
+    if (isFetching) {
+      return (
+        <div className="loading">
+          <img src={require('@/assets/images/common/loading.svg').default} alt="loading" />
+          加载中...
+        </div>
+      )
+    }
+    return <div className="loading">我也是有底线的</div>
   }
 
   return (
     <section className="business-wrapper">
       <h2 className="title">附近商家</h2>
-      <ul className="business-list">{renderBusinessList()}</ul>
+      {renderBusinessList()}
       {renderLoading()}
     </section>
   )

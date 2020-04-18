@@ -2,15 +2,15 @@ import * as constants from './actionTypes'
 
 const initialState = {
   tabs: [
-    { key: 'index', name: '首页', isActive: true },
-    { key: 'order', name: '订单', isActive: false },
-    { key: 'mine', name: '我的', isActive: false },
+    { key: 'index', name: '首页', link: '/' },
+    { key: 'order', name: '订单', link: '/order' },
+    { key: 'mine', name: '我的', link: '/mine' },
   ],
-  activeTabKey: 'index',
   categoryList: [],
   businessList: [],
+  orderList: [],
 
-  // search
+  // business search
   pageIndex: 1,
   pageSize: 10,
   isLastPage: false,
@@ -19,9 +19,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case constants.CHANGE_ACTIVE_TAB:
-      return { ...state, activeTabKey: action.activeKey }
-
     case constants.SET_CATEGORY_LIST:
       return { ...state, categoryList: action.categoryList }
 
@@ -36,6 +33,9 @@ export default (state = initialState, action) => {
 
     case constants.SET_FETCHING_STATE:
       return { ...state, isFetching: action.isFetching }
+
+    case constants.SET_ORDER_LIST:
+      return { ...state, orderList: action.orderList }
 
     default:
       return state
