@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import BusinessItem from './BusinessItem'
+import ScrollView from '@/components/common/ScrollView'
 import {
   getBusinessList,
   setPageIndex,
   setFetchingState,
 } from '@/store/modules/index/actionCreators'
-import { getDocumentSize, getClientSize, getScrollDistance } from '@/assets/javascripts/utils/bom'
 import './Business.style.scss'
 
 function Business({
@@ -22,38 +22,20 @@ function Business({
     getBusinessList(pageIndex)
   }, [])
 
-  // 页面滚动时，加载列表数据
-  useEffect(() => {
-    document.addEventListener('scroll', scrollFetch)
-    return () => document.removeEventListener('scroll', scrollFetch)
-  }, [isFetching, pageIndex])
-
-  const scrollFetch = () => {
-    // 最多加载 3 页
-    if (isFetching || pageIndex >= 3) return
-
-    let scrollTop = getScrollDistance().scrollTop
-    let clientHeight = getClientSize().clientHeight
-    const documentHeight = getDocumentSize().documentHeight
-
-    // 提前一屏加载数据
-    if (scrollTop + clientHeight >= documentHeight - clientHeight) {
-      const nextPageIndex = pageIndex + 1
-      setFetchingState(true)
-      setPageIndex(nextPageIndex)
-      getBusinessList(nextPageIndex)
-    }
+  const loadData = () => {
+    const nextPageIndex = pageIndex + 1
+    setFetchingState(true)
+    setPageIndex(nextPageIndex)
+    getBusinessList(nextPageIndex)
   }
 
-  const renderBusinessList = () => {
-    return (
-      <ul className="business-list">
-        {businessList.map((item, index) => (
-          <BusinessItem key={item.id + index} index={index} item={item} />
-        ))}
-      </ul>
-    )
-  }
+  const renderBusinessList = () => (
+    <ul className="business-list">
+      {businessList.map((item, index) => (
+        <BusinessItem key={item.id + index} index={index} item={item} />
+      ))}
+    </ul>
+  )
 
   const renderLoading = () => {
     if (!businessList || (businessList && businessList.length === 0)) return
@@ -71,7 +53,11 @@ function Business({
   return (
     <section className="business-wrapper">
       <h2 className="title">附近商家</h2>
-      {renderBusinessList()}
+
+      <ScrollView cb={loadData} isFetching={isFetching} isEnd={pageIndex >= 3}>
+        {renderBusinessList()}
+      </ScrollView>
+
       {renderLoading()}
     </section>
   )
