@@ -2,7 +2,7 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-19 14:38:26
+ * @Last Modified time: 2020-04-19 14:44:06
  */
 
 const fs = require('fs')
@@ -67,9 +67,7 @@ module.exports = {
   entry: entrys,
   output: {
     path: DIST_DIR,
-    chunkFilename: '[name].bundle.js',
     filename: DEV_MODE ? 'js/[name].js' : 'js/[name].[hash:8].js',
-    publicPath: DEV_MODE ? '/' : 'https://bxm0927.github.io/react-meituan/',
   },
   resolve: {
     extensions: ['.js', '.json', '.jsx'],

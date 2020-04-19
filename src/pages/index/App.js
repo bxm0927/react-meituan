@@ -15,12 +15,12 @@ function Loading() {
 }
 
 const Order = Loadable({
-  loader: () => import('@/components/index/order'),
+  loader: () => import(/* webpackChunkName: "order" */ '@/components/index/order'),
   loading: Loading,
 })
 
 const Mine = Loadable({
-  loader: () => import('@/components/index/mine'),
+  loader: () => import(/* webpackChunkName: "mine" */ '@/components/index/mine'),
   loading: Loading,
 })
 
