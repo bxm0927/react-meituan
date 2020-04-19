@@ -30,11 +30,13 @@ function Business({
   }
 
   const renderBusinessList = () => (
-    <ul className="business-list">
-      {businessList.map((item, index) => (
-        <BusinessItem key={item.id + index} index={index} item={item} />
-      ))}
-    </ul>
+    <ScrollView cb={loadData} isFetching={isFetching} isEnd={pageIndex >= 3}>
+      <ul className="business-list">
+        {businessList.map((item, index) => (
+          <BusinessItem key={item.id + index} index={index} item={item} />
+        ))}
+      </ul>
+    </ScrollView>
   )
 
   const renderLoading = () => {
@@ -53,11 +55,7 @@ function Business({
   return (
     <section className="business-wrapper">
       <h2 className="title">附近商家</h2>
-
-      <ScrollView cb={loadData} isFetching={isFetching} isEnd={pageIndex >= 3}>
-        {renderBusinessList()}
-      </ScrollView>
-
+      {renderBusinessList()}
       {renderLoading()}
     </section>
   )
