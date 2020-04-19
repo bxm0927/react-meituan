@@ -2,7 +2,7 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-19 14:44:06
+ * @Last Modified time: 2020-04-19 14:48:20
  */
 
 const fs = require('fs')
@@ -217,6 +217,17 @@ module.exports = {
       chunkFilename: DEV_MODE ? 'css/[id].css' : 'css/[id].[contenthash:8].css',
     }),
   ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        common: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+          name: 'common',
+        },
+      },
+    },
+  },
   devServer: {
     contentBase: DIST_DIR,
     compress: true,
