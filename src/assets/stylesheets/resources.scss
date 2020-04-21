@@ -1,4 +1,9 @@
 @function px2rem($px) {
-  $rem: 40px;
+  $rem: 100px;
   @return ($px / $rem) + rem;
+}
+
+@function px2vm($px) {
+  $vw: 7.5px;
+  @return ($px/ $vw) + vw;
 }

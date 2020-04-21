@@ -23,7 +23,7 @@ module.exports = {
     // Convert pixel units to rem (root em) units using PostCSS.
     // https://github.com/cuth/postcss-pxtorem
     "postcss-pxtorem": {
-      rootValue: 40,
+      rootValue: 100,
       unitPrecision: 5,
       minPixelValue: 2,
       propList: ["*"],

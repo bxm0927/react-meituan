@@ -55,6 +55,7 @@ function BusinessItem({ item, index }) {
 
         <div className="business-info">
           <p className="name ellipsis">{item.name}</p>
+          <p className="name2 ellipsis">{item.name}</p>
 
           <div className="meta-box">
             <span className="score">{renderScore(item.wm_poi_score)}</span>

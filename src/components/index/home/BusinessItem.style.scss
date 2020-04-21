@@ -52,11 +52,19 @@
     line-height: 1;
     overflow: hidden;
     .name {
-      margin-top: 10px;
-      margin-bottom: 12px;
+      margin-top: px2rem(10px);
+      margin-bottom: px2rem(12px);
       width: 80%;
       color: #333;
-      font-size: 32px;
+      font-size: px2rem(32px);
+      font-weight: bold;
+    }
+    .name2 {
+      margin-top: px2vm(10px);
+      margin-bottom: px2vm(12px);
+      width: 80%;
+      color: #333;
+      font-size: px2vm(32px);
       font-weight: bold;
     }
     .meta-box {

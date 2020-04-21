@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{206:function(n,e,a){"use strict";a.r(e);var t=a(0),i=a.n(t);e.default=function(){return i.a.createElement("div",{className:"mine-tab"},"mine-tab")}}}]);
