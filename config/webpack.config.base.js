@@ -2,7 +2,7 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-21 17:17:02
+ * @Last Modified time: 2020-04-24 03:24:02
  */
 
 const fs = require('fs')
@@ -133,7 +133,11 @@ module.exports = {
             },
           },
         ],
-        include: SRC_DIR,
+        include: [
+          path.resolve(__dirname, '../src'),
+          path.resolve(__dirname, '../node_modules/antd-mobile'),
+          path.resolve(__dirname, '../node_modules/normalize.css/normalize.css'),
+        ],
       },
       // images
       {
@@ -160,7 +164,7 @@ module.exports = {
             name: DEV_MODE ? '[name].[ext]' : '[name].[hash:8].[ext]',
           },
         },
-        include: SRC_DIR,
+        include: [SRC_DIR],
       },
       // fonts
       {
