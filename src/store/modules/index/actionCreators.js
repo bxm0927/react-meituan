@@ -56,7 +56,7 @@ export const getBusinessList = (pageIndex) => (dispatch) => {
       dispatch(setBusinessList(businessList))
       dispatch(setFetchingState(false))
     }
-  }, 500)
+  }, 5000)
 }
 
 export const getOrderList = () => async (dispatch) => {

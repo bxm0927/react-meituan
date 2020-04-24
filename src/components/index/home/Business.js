@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import BusinessItem from './BusinessItem'
+import BusinessSkeleton from './BusinessSkeleton'
 import ScrollView from '@/components/common/ScrollView'
 import {
   getBusinessList,
@@ -17,6 +18,8 @@ function Business({
   isFetching,
   setFetchingState,
 }) {
+  const emptyPage = !businessList || (businessList && businessList.length === 0)
+
   // 页面初始化时，加载列表数据
   useEffect(() => {
     getBusinessList(pageIndex)
@@ -29,27 +32,28 @@ function Business({
     getBusinessList(nextPageIndex)
   }
 
-  const renderBusinessList = () => (
-    <ScrollView cb={loadData} isFetching={isFetching} isEnd={pageIndex >= 3}>
-      <ul className="business-list">
-        {businessList.map((item, index) => (
-          <BusinessItem key={item.id + index} index={index} item={item} />
-        ))}
-      </ul>
-    </ScrollView>
-  )
+  const renderBusinessList = () => {
+    if (emptyPage) return <BusinessSkeleton />
+    return (
+      <ScrollView cb={loadData} isFetching={isFetching} isEnd={pageIndex >= 3}>
+        <ul className="business-list">
+          {businessList.map((item, index) => (
+            <BusinessItem key={item.id + index} index={index} item={item} />
+          ))}
+        </ul>
+      </ScrollView>
+    )
+  }
 
   const renderLoading = () => {
-    if (!businessList || (businessList && businessList.length === 0)) return
-    if (isFetching) {
-      return (
-        <div className="loading">
-          <img src={require('@/assets/images/common/loading.svg').default} alt="loading" />
-          加载中...
-        </div>
-      )
-    }
-    return <div className="loading">我也是有底线的</div>
+    if (emptyPage) return
+    if (!isFetching) return <div className="loading">我也是有底线的</div>
+    return (
+      <div className="loading">
+        <img src={require('@/assets/images/common/loading.svg').default} alt="loading" />
+        加载中...
+      </div>
+    )
   }
 
   return (
