@@ -2,7 +2,7 @@
  * @Author: xiaoming.bai
  * @Date: 2020-04-05 17:55:35
  * @Last Modified by: xiaoming.bai
- * @Last Modified time: 2020-04-24 03:24:02
+ * @Last Modified time: 2020-04-25 01:03:05
  */
 
 const fs = require('fs')
@@ -51,7 +51,6 @@ const getTemplates = (entrys) => {
         filename: `${pageName}.html`,
         template: fullFilePath,
         chunks: [pageName],
-        title: `Page ${pageName}`,
       })
       htmlWebpackPlugin.push(html)
     }

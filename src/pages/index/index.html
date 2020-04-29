@@ -2,11 +2,35 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>美团外卖首页</title>
     <script src="./rem.js"></script>
   </head>
+  <style>
+    .app-skeleton {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAKcBAMAAADhhecRAAADJmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDAgNzkuMTYwNDUxLCAyMDE3LzA1LzA2LTAxOjA4OjIxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOCBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDlGMTU0NEMxMkU2MTFFOTg3ODNBNzNGMTlCOTIwODYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDlGMTU0NEQxMkU2MTFFOTg3ODNBNzNGMTlCOTIwODYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDozNjQwMEE3RjExODUxMUU5ODc4M0E3M0YxOUI5MjA4NiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDozNjQwMEE4MDExODUxMUU5ODc4M0E3M0YxOUI5MjA4NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqUknaoAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAD1BMVEX09PT/////TjD/hTr/sH+v035OAAAEg0lEQVR42u3cbW7aShSAYY/CAmbUrCDdACoswBHe/5pqolQlQOEYu4JDnvf3XM4TyzXGH7fb5G3dwcPDp8e/PXiX8L8eHf/zAv7tLcOm/4MfdptulxS/LXVT6nYY2+XDtzqU2pWuK6uMW75vrRuGbd9eEu7z762tPv6M13RbftxxVh/scdfPhu9X627Y7zbDkBBfd0NfS+u6VT78djzIlNV7Ww27fPjNuu76zXvbZdznN5vxON/2vZaWEd93Sff5zXY8NxgP9bs+4z7f13V7GfHlJePR5scHfvyiSnicby/rNu7ztdR0+P0Z8XY82nSr8V/ta0L8Zn9usB0SnlX2q89/t12pu3RHm8+fgH3p8v2SeqqrB6mv27jcBw8PvzhekiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiR9n1reKjw8fGp8reMxqJTL/13ZH6hqm79ozrRTfPk8hJZrE68dZ0OLZk07wUe+AerfNWXeonnTjvGR7696uKbMWTRz2kV8CXxcaGYXwU+fdoTvAh9Xb1gUsN/wQV/xRyvPf17o5CiyaPa0r/jIWdvxyLMzQ4tmT/uCP1l5bmbovDSyaP60L/jICXO9zXUGduO0EseXwMeFZnYR/MRptbu8sgRGhlxdxDVx2iE+8kPr3MiTmaFFC0x7FvzZlcczQ7+DI4uWmGbLP8CWj1waOT/y5GQvsGiJaVfxIVebvmiJaVd3mxtmLrcZ5m751LsNPDw8/D3wyY7zqb9hk5yYPT++3nwaHvoLp03zG/YR8KkvfaTGL3AB7o6X+1JfaE19iTv3zYUWcd1yW6dE/sLJH1QvnYSWyK2kdvuiudOe6lZm6pvIB5938YmFyF33yKJZ0+q/vhiuPMoQesQrsmjONM/bwH9f/HKXZO5w3QYeHh4eHh4e/pnwTonh4eHh4R8f7z2p6CLvSZ09X7r+af+G3ePmQuRGS50803tS1/Cpb2Vmvomc+vZ95gcnQg+R1KUeWfGe1JUf9IGRJzM9YzYNn/q5Slv+Xlt+iQtwd7vcN8PVpi9aYtpzPz/vtQt4eHj4534fNsk3bOoTsyc8ny+Rme2GRQtM8xv2EfCpL32kxntP6m4XWr0ndbebC96Tii+aO817Uo9yE9l7UlMWzZnmeRv4b4x30QkeHh4eHh4e/kHwTonh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHhHwEvSZL+R85t4OHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHhD/H+Z5t2G3h4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHj4Q7wkSZIkSdLlama6i07w8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDwM/C/ASojmF51vPgAAAAAAElFTkSuQmCC');
+      background-color: #fff;
+      background-size: cover;
+      z-index: 1000;
+    }
+  </style>
+
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="app-skeleton"></div>
+    </div>
+
+    <script>
+      // 多骨架屏判断
+      console.log('location: ', location)
+    </script>
   </body>
 </html>
