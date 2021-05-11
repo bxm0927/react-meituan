@@ -18,7 +18,7 @@
     "antd-mobile": "^2.3.1",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loadable": "^5.5.0",
